@@ -3,3 +3,9 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/search", method="post")
+    input(type="text",placeholder="Hashtag", name="hashtag")
+    input(type="submit", value="Translate")
+
+  p#result Enter something in and hopefully this will populate

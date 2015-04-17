@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var Dict = require('./lib/dict');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -24,6 +26,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+var dictionary = new Dict('815f1768-6ab9-490b-a1a6-772974c5b746');
+var trans = require('./lib/translator');
+
+// add seed words
+
+var words = {
+  'im': "i'm",
+  'i': 'i',
+  'lol': 'lol',
+  'he': 'he',
+  'untag': 'untag',
+  'stephen': 'stephen',
+  'marrissa': 'marrissa',
+  'jessica': 'jessica'
+}
+
+for (var x in words) {
+  trans.addWord(x, words[x]);
+}
+
+app.set('dictionary', dictionary);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
