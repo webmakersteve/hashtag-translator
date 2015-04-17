@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var Dict = require('./lib/dict');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -25,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 var dictionary = new Dict('815f1768-6ab9-490b-a1a6-772974c5b746');
 var trans = require('./lib/translator');
